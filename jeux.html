@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEKKEN: Creature Combat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Main Title -->
+    <div class="main-title" id="mainTitle">
+        <h1>TEKKEN</h1>
+        <div class="subtitle">CREATURE COMBAT</div>
+    </div>
+
+    <!-- Character Selection Screen -->
+    <div id="character-selection" class="screen">
+        <div class="selection-container">
+            <h2 class="selection-title">SELECT YOUR FIGHTER</h2>
+            <div class="character-grid">
+                <div class="char-card" data-char="elf">
+                    <div class="char-portrait">
+                        <div class="char-emoji">🧝‍♂️</div>
+                        <div class="char-glow"></div>
+                    </div>
+                    <div class="char-info">
+                        <h3 class="char-name">ELVEN WARRIOR</h3>
+                        <div class="char-stats">
+                            <div class="stat">
+                                <span class="stat-label">VITESSE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">FORCE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 70%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">MAGIE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 95%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="char-card" data-char="orc">
+                    <div class="char-portrait">
+                        <div class="char-emoji">👹</div>
+                        <div class="char-glow"></div>
+                    </div>
+                    <div class="char-info">
+                        <h3 class="char-name">ORC BERSERKER</h3>
+                        <div class="char-stats">
+                            <div class="stat">
+                                <span class="stat-label">VITESSE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 60%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">FORCE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 95%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">ENDURANCE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 85%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="char-card" data-char="dragon">
+                    <div class="char-portrait">
+                        <div class="char-emoji">🐉</div>
+                        <div class="char-glow"></div>
+                    </div>
+                    <div class="char-info">
+                        <h3 class="char-name">DRAGON MONK</h3>
+                        <div class="char-stats">
+                            <div class="stat">
+                                <span class="stat-label">VITESSE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 80%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">FORCE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">CHI</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="char-card" data-char="robot">
+                    <div class="char-portrait">
+                        <div class="char-emoji">🤖</div>
+                        <div class="char-glow"></div>
+                    </div>
+                    <div class="char-info">
+                        <h3 class="char-name">CYBER NINJA</h3>
+                        <div class="char-stats">
+                            <div class="stat">
+                                <span class="stat-label">VITESSE</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">TECH</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">ARMOR</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 90%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-container" class="screen hidden">
+        <!-- HUD -->
+        <div class="hud">
+            <div class="round-indicator">
+                <div class="round-text">ROUND <span id="currentRound">1</span></div>
+                <div class="fight-text" id="fightText">FIGHT!</div>
+            </div>
+
+            <div class="health-bars">
+                <div class="player-hud">
+                    <div class="fighter-name" id="playerName">PLAYER</div>
+                    <div class="health-container">
+                        <div class="health-bar" id="playerHealth"></div>
+                        <div class="health-text">
+                            <span id="playerHP">100</span>/<span id="playerMaxHP">100</span>
+                        </div>
+                    </div>
+                    <div class="stamina-container">
+                        <div class="stamina-bar" id="playerStamina"></div>
+                    </div>
+                    <div class="combo-counter">
+                        <span id="playerCombo">0</span> HIT COMBO
+                    </div>
+                </div>
+
+                <div class="vs-indicator">VS</div>
+
+                <div class="enemy-hud">
+                    <div class="fighter-name" id="enemyName">ENEMY</div>
+                    <div class="health-container">
+                        <div class="health-bar enemy-health" id="enemyHealth"></div>
+                        <div class="health-text">
+                            <span id="enemyHP">100</span>/<span id="enemyMaxHP">100</span>
+                        </div>
+                    </div>
+                    <div class="stamina-container">
+                        <div class="stamina-bar" id="enemyStamina"></div>
+                    </div>
+                    <div class="combo-counter">
+                        <span id="enemyCombo">0</span> HIT COMBO
+                    </div>
+                </div>
+            </div>
+
+            <div class="timer">
+                <div class="timer-text" id="timer">99</div>
+            </div>
+        </div>
+
+        <!-- Combat Zone -->
+        <div class="combat-zone">
+            <div class="fighter player-fighter" id="playerFighter">
+                <div class="fighter-sprite" id="playerSprite">🧝‍♂️</div>
+                <div class="fighter-shadow"></div>
+                <div class="damage-indicator" id="playerDamage"></div>
+            </div>
+
+            <div class="fighter enemy-fighter" id="enemyFighter">
+                <div class="fighter-sprite" id="enemySprite">👹</div>
+                <div class="fighter-shadow"></div>
+                <div class="damage-indicator" id="enemyDamage"></div>
+            </div>
+        </div>
+
+        <!-- Fighting Stage -->
+        <div class="fighting-stage">
+            <div class="stage-floor"></div>
+            <div class="stage-lights"></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="control-section">
+                <h3>ATTAQUES</h3>
+                <div class="control-grid">
+                    <button id="lightPunch" class="control-btn punch-btn" data-key="Q">
+                        <span class="btn-key">Q</span>
+                        <span class="btn-label">POING GAUCHE</span>
+                    </button>
+                    <button id="rightPunch" class="control-btn punch-btn" data-key="E">
+                        <span class="btn-key">E</span>
+                        <span class="btn-label">POING DROIT</span>
+                    </button>
+                    <button id="leftKick" class="control-btn kick-btn" data-key="A">
+                        <span class="btn-key">A</span>
+                        <span class="btn-label">PIED GAUCHE</span>
+                    </button>
+                    <button id="rightKick" class="control-btn kick-btn" data-key="D">
+                        <span class="btn-key">D</span>
+                        <span class="btn-label">PIED DROIT</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>DÉFENSE</h3>
+                <div class="control-grid">
+                    <button id="blockBtn" class="control-btn block-btn" data-key="S">
+                        <span class="btn-key">S</span>
+                        <span class="btn-label">BLOQUER</span>
+                    </button>
+                    <button id="dashBtn" class="control-btn dash-btn" data-key="SPACE">
+                        <span class="btn-key">ESPACE</span>
+                        <span class="btn-label">ESQUIVE</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>SPÉCIAUX</h3>
+                <div class="control-grid">
+                    <button id="specialBtn" class="control-btn special-btn" data-key="F">
+                        <span class="btn-key">F</span>
+                        <span class="btn-label">ATTAQUE SPÉCIALE</span>
+                    </button>
+                    <button id="ultimateBtn" class="control-btn ultimate-btn" data-key="R">
+                        <span class="btn-key">R</span>
+                        <span class="btn-label">ULTIMATE</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Combo Display -->
+        <div class="combo-display" id="comboDisplay">
+            <div class="combo-text" id="comboText"></div>
+            <div class="combo-damage" id="comboDamage"></div>
+        </div>
+
+        <!-- Messages -->
+        <div class="message-display" id="messageDisplay">
+            <div class="message-text" id="messageText"></div>
+        </div>
+    </div>
+
+    <!-- Victory Screen -->
+    <div id="victory-screen" class="screen hidden">
+        <div class="victory-container">
+            <div class="victory-title" id="victoryTitle">VICTORY!</div>
+            <div class="victory-fighter" id="victoryFighter">🧝‍♂️</div>
+            <div class="victory-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Damage:</span>
+                    <span class="stat-value" id="totalDamage">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Max Combo:</span>
+                    <span class="stat-value" id="maxCombo">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="fightTime">0</span>
+                </div>
+            </div>
+            <div class="victory-buttons">
+                <button id="playAgainBtn" class="victory-btn">REJOUER</button>
+                <button id="selectCharBtn" class="victory-btn">CHANGER DE PERSONNAGE</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
